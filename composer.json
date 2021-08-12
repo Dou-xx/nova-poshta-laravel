@@ -1,0 +1,19 @@
+{
+    "name": "dou/nova-poshta-api",
+    "description": "Nova Poshta API",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dou\\NovaPoshtaApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sergey",
+            "email": "nogganoxx@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
