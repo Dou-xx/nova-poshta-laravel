@@ -46,10 +46,20 @@ class Response
     }
 
     /**
+     * @param array|null $selectedFields
+     *
      * @return Collection
      */
-    public function getData(): Collection
+    public function getData(array $selectedFields = null): Collection
     {
+        if($selectedFields) {
+            return $this->data->map(function ($item) use ($selectedFields) {
+                return collect($item)
+                    ->only($selectedFields)
+                    ->all();
+            });
+        }
+
         return $this->data;
     }
 
@@ -66,9 +76,15 @@ class Response
      *
      * @return array|ArrayAccess|mixed
      */
-    public function first()
+    public function first(string $fieldName = null)
     {
-        return $this->getData()->first();
+        $firstElement = $this->getData()->first();
+
+        if ($fieldName) {
+            return Arr::get($firstElement, $fieldName);
+        }
+
+        return $firstElement;
     }
 
     /**

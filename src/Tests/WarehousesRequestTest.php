@@ -38,10 +38,10 @@ class WarehousesRequestTest extends TestCase
      */
     public function testSearchCityByRef()
     {
-        $ref = 'ebc0eda9-93ec-11e3-b441-0050568002cf';
+        $cityRef = 'ebc0eda9-93ec-11e3-b441-0050568002cf';
         $request = new WarehousesRequest();
-        $request->setCityRef($ref);
-        $this->assertSame(Arr::get($request->getRequestData(), 'methodProperties.CityRef'), $ref);
+        $request->setCityRef($cityRef);
+        $this->assertSame(Arr::get($request->getRequestData(), 'methodProperties.CityRef'), $cityRef);
 
         $api = new NovaPoshtaAPI();
         $api->setRequest($request);
@@ -50,5 +50,6 @@ class WarehousesRequestTest extends TestCase
         $this->assertSame($api->response->isSuccess(), true);
         $this->assertTrue($api->response->count() > 0);
         $this->assertArrayHasKey('Ref', $api->response->first());
+        $this->assertSame($cityRef, $api->response->first('CityRef'));
     }
 }

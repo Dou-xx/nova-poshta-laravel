@@ -28,9 +28,7 @@ class NovaPoshtaAPI
      */
     public function __construct(string $apiKey = null)
     {
-        if ($apiKey) {
-            $this->apiKey = $apiKey;
-        }
+        $this->apiKey  = $apiKey ?? env('NOVA_POSHTA_API_KEY');
 
         return $this;
     }
