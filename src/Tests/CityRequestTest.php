@@ -1,6 +1,6 @@
 <?php
 
-namespace Dou\NovaPoshtaApi\tests;
+namespace Dou\NovaPoshtaApi\Tests;
 
 use Dou\NovaPoshtaApi\Requests\Address\CityRequest;
 use Dou\NovaPoshtaApi\Service\NovaPoshtaAPI;
@@ -17,7 +17,7 @@ class CityRequestTest extends TestCase
      */
     public function testSearchCityByName()
     {
-        $name = 'Днепр';
+        $name = 'Мелитополь';
         $request = new CityRequest();
         $request->setCityName($name);
         $this->assertSame(Arr::get($request->getRequestData(), 'methodProperties.FindByString'), $name);

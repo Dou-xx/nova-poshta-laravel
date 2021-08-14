@@ -4,6 +4,7 @@ namespace Dou\NovaPoshtaApi\Response;
 
 use ArrayAccess;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class Response
 {
@@ -13,7 +14,7 @@ class Response
     private $response;
 
     /**
-     * @var array
+     * @var Collection
      */
     private $data;
 
@@ -38,16 +39,16 @@ class Response
     public function setResponse(array $response): self
     {
         $this->response = $response;
-        $this->data = Arr::get($response, 'data');
+        $this->data = collect(Arr::get($response, 'data'));
         $this->success = Arr::get($response, 'success');
 
         return $this;
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getData(): array
+    public function getData(): Collection
     {
         return $this->data;
     }
@@ -67,7 +68,7 @@ class Response
      */
     public function first()
     {
-        return Arr::get($this->getData(), 0);
+        return $this->getData()->first();
     }
 
     /**
@@ -77,6 +78,6 @@ class Response
      */
     public function count(): int
     {
-        return is_array($this->getData()) ? count($this->getData()) : 0;
+        return $this->getData()->count();
     }
 }
